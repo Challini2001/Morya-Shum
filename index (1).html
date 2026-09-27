@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morya Shum — Fragments of the sea</title>
+<meta name="description" content="Morya Shum gilds and decoupages naturally sourced shells into jewelry dishes, wine stoppers, and incense holders — each one made by hand.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pacific: #14232B;
+    --horizon: #4B5F68;
+    --fog: #B9C0C0;
+    --concrete: #8D8B84;
+    --bone: #EDEAE3;
+    --oxide: #7A4430;
+    --oxide-dark: #5E3526;
+    --gold: #B08D45;
+
+    --serif: 'Bodoni Moda', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+    --measure: 62ch;
+    --nav-h: 76px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bone);
+    color: var(--pacific);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  img,svg{ display:block; max-width:100%; }
+  img{ width:100%; height:100%; object-fit: cover; }
+  a{ color: inherit; }
+  ::selection{ background: var(--horizon); color: var(--bone); }
+
+  h1,h2,h3{
+    font-family: var(--serif);
+    font-weight: 500;
+    margin: 0;
+    letter-spacing: 0.005em;
+  }
+  h1{ font-size: clamp(2.6rem, 7vw, 5.4rem); line-height: 1.05; font-weight: 400; }
+  h2{ font-size: clamp(1.9rem, 3.4vw, 2.6rem); line-height: 1.15; }
+  h3{ font-size: clamp(1.25rem, 2vw, 1.5rem); line-height: 1.2; }
+
+  p{ margin: 0 0 1.1em; max-width: var(--measure); }
+  .eyebrow{
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--horizon);
+  }
+
+  a:focus-visible, button:focus-visible, .toggle:focus-visible{
+    outline: 1.5px solid var(--oxide);
+    outline-offset: 3px;
+  }
+
+  .wrap{ max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+  @media (max-width: 640px){ .wrap{ padding: 0 22px; } }
+
+  /* ---------- Announcement bar ---------- */
+  .announce{
+    background: var(--pacific); color: var(--fog);
+    text-align:center; font-family: var(--mono); font-size: 0.74rem;
+    letter-spacing: 0.03em; padding: 9px 16px;
+  }
+
+  /* ---------- Nav ---------- */
+  header.site{
+    position: sticky; top:0; z-index: 50;
+    background: rgba(237,234,227,0.94);
+    backdrop-filter: blur(6px);
+    border-bottom: 0.5px solid var(--concrete);
+  }
+  .nav{
+    height: var(--nav-h);
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .mark{ display:flex; align-items:center; text-decoration:none; }
+  .mark img{ height: 40px; width:auto; object-fit:contain; }
+  nav.links{ display:flex; gap: 30px; align-items:center; }
+  nav.links a{
+    text-decoration:none; font-size: 0.9rem; color: var(--pacific);
+    padding-bottom: 3px; border-bottom: 1px solid transparent;
+    transition: border-color .2s ease, color .2s ease;
+    white-space: nowrap;
+  }
+  nav.links a:hover{ border-color: var(--oxide); color: var(--oxide-dark); }
+  nav.links a.cta{
+    border: 0.5px solid var(--pacific); padding: 8px 16px; border-bottom: 0.5px solid var(--pacific);
+  }
+  nav.links a.cta:hover{ background: var(--pacific); color: var(--bone); }
+
+  .toggle{
+    display:none; background:none; border: 0.5px solid var(--pacific);
+    width: 38px; height: 38px; cursor:pointer; position:relative;
+  }
+  .toggle span, .toggle span::before, .toggle span::after{
+    content:''; position:absolute; left:9px; right:9px; height:1px; background: var(--pacific);
+  }
+  .toggle span{ top:18px; }
+  .toggle span::before{ top:-6px; }
+  .toggle span::after{ top:6px; }
+
+  @media (max-width: 880px){
+    nav.links{
+      position:absolute; top: var(--nav-h); left:0; right:0;
+      flex-direction:column; align-items:stretch; gap:0; background: var(--bone);
+      border-bottom: 0.5px solid var(--concrete);
+      max-height:0; overflow:hidden; transition: max-height .28s ease;
+    }
+    nav.links.open{ max-height: 480px; }
+    nav.links a{ padding: 16px 22px; border-bottom: 0.5px solid var(--fog); }
+    nav.links a.cta{ margin: 14px 22px; text-align:center; }
+    .toggle{ display:block; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative; overflow:hidden;
+    min-height: calc(100vh - var(--nav-h) - 33px);
+    display:flex; align-items:flex-end;
+    color: var(--bone);
+  }
+  .hero-photo{ position:absolute; inset:0; }
+  .hero-photo img{ object-position: center 62%; }
+  .hero-photo::after{
+    content:''; position:absolute; inset:0;
+    background: linear-gradient(180deg, rgba(20,35,43,0.15) 0%, rgba(20,35,43,0.45) 55%, rgba(15,23,28,0.86) 100%);
+  }
+  .hero-inner{ position:relative; z-index:2; width:100%; padding: 120px 40px 72px; }
+  .hero-inner .eyebrow{ color: var(--fog); }
+  .hero h1{ margin-top: 14px; max-width: 14ch; }
+  .hero-sub{ margin-top: 26px; max-width: 56ch; color: var(--fog); font-size: 1.02rem; }
+  .hero-coord{ margin-top: 34px; font-family: var(--mono); font-size: 0.78rem; color: var(--fog); opacity:0.8; letter-spacing: 0.03em; }
+
+  /* ---------- Section generic ---------- */
+  section{ padding: 108px 0; }
+  @media (max-width: 640px){ section{ padding: 72px 0; } }
+  .section-head{ max-width: 640px; margin-bottom: 56px; display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+  .section-head p{ color: var(--horizon); margin-top: 14px; }
+  .section-head .see-all{ font-size: 0.88rem; text-decoration:none; border-bottom: 1px solid currentColor; padding-bottom:2px; white-space:nowrap; }
+
+  /* ---------- Positioning statement ---------- */
+  .statement{ text-align:center; padding: 96px 0; }
+  .statement p{
+    margin: 0 auto; max-width: 46ch; font-family: var(--serif); font-weight: 400;
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem); line-height: 1.5; color: var(--pacific);
+  }
+
+  /* ---------- Merch rail ---------- */
+  .rail{ background: var(--pacific); color: var(--bone); }
+  .rail .section-head p{ color: var(--fog); }
+  .rail .section-head .eyebrow{ color: var(--fog); }
+  .rail-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--horizon); }
+  .rail-item{ background: var(--pacific); }
+  .rail-photo{ aspect-ratio: 1/1; overflow:hidden; }
+  .rail-item .info{ padding: 20px 4px 4px; }
+  .rail-item .tag{ font-family: var(--mono); font-size: 0.7rem; color: var(--fog); opacity:0.75; }
+  .rail-item h3{ font-size: 1.05rem; margin-top: 6px; }
+  @media (max-width: 780px){ .rail-grid{ grid-template-columns: 1fr; } }
+
+  /* ---------- Collections ---------- */
+  .collections{ display:grid; grid-template-columns: repeat(3, 1fr); }
+  .coll-block{
+    position:relative; min-height: 460px; display:flex; flex-direction:column; justify-content:flex-end;
+    border-left: 0.5px solid var(--concrete); text-decoration:none; color: var(--bone);
+    overflow:hidden;
+  }
+  .coll-block:first-child{ border-left: none; }
+  .coll-block .bg{ position:absolute; inset:0; }
+  .coll-block .bg::after{ content:''; position:absolute; inset:0; background: linear-gradient(180deg, rgba(20,35,43,0.05) 30%, rgba(15,23,28,0.82) 100%); }
+  .coll-block .info{ position:relative; z-index:2; padding: 32px; }
+  .coll-block .count{ font-family: var(--mono); font-size: 0.76rem; opacity: 0.85; }
+  .coll-block h3{ margin: 14px 0 8px; }
+  .coll-block p{ font-size: 0.93rem; max-width: 30ch; opacity: 0.92; }
+  .coll-block .view{
+    margin-top: 20px; display:inline-block; width:max-content;
+    font-size: 0.86rem; border-bottom: 1px solid currentColor; padding-bottom: 2px;
+  }
+  @media (max-width: 780px){
+    .collections{ grid-template-columns: 1fr; }
+    .coll-block{ border-left:none; border-top: 0.5px solid var(--concrete); min-height: 340px; }
+    .coll-block:first-child{ border-top:none; }
+  }
+
+  /* ---------- Featured object ---------- */
+  .featured{ background: var(--bone); }
+  .feat-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items:center; }
+  @media (max-width: 860px){ .feat-grid{ grid-template-columns: 1fr; gap: 40px; } }
+  .feat-photos{ display:grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .feat-photos .tall{ grid-column: 1 / -1; aspect-ratio: 5/4; overflow:hidden; }
+  .feat-photos .small{ aspect-ratio: 1/1; overflow:hidden; }
+
+  .feat-copy{ padding: 0 8px; }
+  .feat-copy .eyebrow{ margin-bottom: 10px; }
+  .feat-copy h2{ margin-bottom: 16px; }
+  .feat-copy .lede{ color: var(--horizon); font-size: 1.02rem; }
+  .variation-note{
+    margin-top: 18px; padding: 14px 16px; border-left: 2px solid var(--gold);
+    background: rgba(176,141,69,0.08); font-size: 0.9rem; color: var(--pacific);
+  }
+
+  .spec{ margin-top: 30px; border-top: 0.5px solid var(--concrete); font-family: var(--mono); font-size: 0.85rem; }
+  .spec-row{ display:flex; justify-content:space-between; padding: 13px 0; border-bottom: 0.5px solid var(--concrete); gap: 16px; }
+  .spec-row span:first-child{ color: var(--horizon); white-space:nowrap; }
+  .spec-row span:last-child{ text-align:right; }
+
+  .btn{
+    display:inline-block; margin-top: 28px; background: var(--oxide); color: var(--bone);
+    text-decoration:none; padding: 13px 26px; font-size: 0.92rem; border: none; cursor:pointer;
+    font-family: var(--sans);
+  }
+  .btn:hover{ background: var(--oxide-dark); }
+  .btn.ghost{ background: transparent; color: var(--bone); border: 0.5px solid var(--bone); }
+  .btn.ghost:hover{ background: var(--bone); color: var(--pacific); }
+
+  /* ---------- Materials ---------- */
+  .materials{ background: var(--pacific); color: var(--bone); }
+  .mat-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items:center; }
+  @media (max-width: 860px){ .mat-grid{ grid-template-columns: 1fr; gap: 40px; } }
+  .mat-photos{ display:grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .mat-photos div{ aspect-ratio: 3/4; overflow:hidden; }
+  .materials p{ color: rgba(237,234,227,0.86); }
+  .mat-list{ margin-top: 26px; padding:0; list-style:none; }
+  .mat-list li{
+    display:flex; gap: 16px; padding: 16px 0; border-top: 0.5px solid var(--horizon);
+    font-size: 0.94rem;
+  }
+  .mat-list li:last-child{ border-bottom: 0.5px solid var(--horizon); }
+  .mat-list .n{ font-family: var(--mono); font-size: 0.78rem; color: var(--fog); padding-top: 2px; }
+  .mat-list strong{ display:block; font-family: var(--serif); font-weight:500; font-size: 1.05rem; margin-bottom: 4px; }
+  .mat-list span.d{ color: rgba(237,234,227,0.78); }
+
+  /* ---------- About ---------- */
+  .about-grid{ display:grid; grid-template-columns: 1fr 0.85fr; gap: 72px; align-items:start; }
+  @media (max-width: 860px){ .about-grid{ grid-template-columns: 1fr; gap: 44px; } }
+  .pullquote{
+    border-left: 1px solid var(--oxide); padding-left: 22px; margin: 30px 0;
+    font-family: var(--serif); font-size: 1.2rem; line-height: 1.5; color: var(--pacific);
+  }
+  .about-photo{ aspect-ratio: 4/5; overflow:hidden; }
+
+  /* ---------- Commission ---------- */
+  .commission{
+    position:relative; overflow:hidden; color: var(--bone); min-height: 520px;
+    display:flex; align-items:center;
+  }
+  .commission .bg{ position:absolute; inset:0; }
+  .commission .bg::after{ content:''; position:absolute; inset:0; background: linear-gradient(90deg, rgba(15,23,28,0.92) 0%, rgba(15,23,28,0.62) 55%, rgba(15,23,28,0.3) 100%); }
+  .commission-inner{ position:relative; z-index:2; max-width: 520px; padding: 80px 0; }
+  .commission-inner p{ color: var(--fog); }
+
+  /* ---------- Journal ---------- */
+  .journal-list{ border-top: 0.5px solid var(--concrete); margin-top: 20px; }
+  .entry{
+    display:grid; grid-template-columns: 90px 90px 1fr; gap: 24px; padding: 26px 0; align-items:center;
+    border-bottom: 0.5px solid var(--concrete); text-decoration:none; color: inherit;
+  }
+  .entry .thumb{ width:90px; height:90px; overflow:hidden; }
+  .entry .date{ font-family: var(--mono); font-size: 0.8rem; color: var(--horizon); }
+  .entry h3{ margin-bottom: 6px; font-size: 1.15rem; }
+  .entry p{ color: var(--horizon); font-size: 0.94rem; margin:0; }
+  .entry:hover h3{ color: var(--oxide-dark); }
+  @media (max-width: 620px){
+    .entry{ grid-template-columns: 64px 1fr; }
+    .entry .date{ display:none; }
+  }
+
+  /* ---------- Newsletter ---------- */
+  .newsletter{ background: var(--fog); }
+  .nl-inner{ display:flex; justify-content:space-between; align-items:center; gap: 32px; flex-wrap:wrap; }
+  .nl-inner h2{ font-size: clamp(1.5rem,2.6vw,2rem); }
+  .nl-form{ display:flex; gap: 0; max-width: 420px; width:100%; }
+  .nl-form input{
+    flex:1; border: 1px solid var(--pacific); border-right:none; background: var(--bone);
+    padding: 13px 16px; font-family: var(--sans); font-size: 0.92rem; color: var(--pacific);
+  }
+  .nl-form button{
+    background: var(--pacific); color: var(--bone); border:none; padding: 13px 22px;
+    font-family: var(--sans); font-size: 0.92rem; cursor:pointer;
+  }
+  .nl-form button:hover{ background: var(--oxide-dark); }
+
+  /* ---------- Footer ---------- */
+  footer{ background: var(--pacific); color: var(--fog); padding: 72px 0 40px; }
+  .foot-grid{ display:grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 48px; }
+  @media (max-width: 780px){ .foot-grid{ grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px){ .foot-grid{ grid-template-columns: 1fr; } }
+  footer .mark img{ height: 46px; margin-bottom: 14px; }
+  footer p{ color: var(--fog); font-size: 0.92rem; }
+  footer a{ text-decoration:none; color: var(--fog); }
+  footer a:hover{ color: var(--bone); }
+  .foot-col .label{ font-family: var(--mono); font-size: 0.74rem; color: var(--concrete); margin-bottom: 14px; letter-spacing: 0.02em; }
+  .foot-col a{ display:block; margin-bottom: 10px; font-size: 0.92rem; }
+  .foot-bottom{
+    margin-top: 56px; padding-top: 24px; border-top: 0.5px solid var(--horizon);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap: 10px;
+    font-family: var(--mono); font-size: 0.74rem; color: var(--concrete);
+  }
+</style>
+</head>
+<body>
+
+<div class="announce">gathered from the coastline · one piece at a time, none alike</div>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="mark" href="#home"><img src="assets/logo.png" alt="Morya Shum"></a>
+    <button class="toggle" aria-label="Open menu" aria-expanded="false" id="navToggle"><span></span></button>
+    <nav class="links" id="navLinks">
+      <a href="#collections">shells</a>
+      <a href="#about">about</a>
+      <a href="#materials">materials &amp; process</a>
+      <a class="cta" href="#commission">make it custom</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-photo"><img src="assets/hero-shell-sea.jpg" alt="A hand holding a gold-edged, coral-patterned shell dish out over the dark water"></div>
+    <div class="hero-inner wrap">
+      <div class="eyebrow">morya shum</div>
+      <h1>fragments<br>of the sea</h1>
+      <p class="hero-sub">Morya Shum is a project born from a love of waves breaking, salt in the air, and the feeling of freedom. We transform seashells — shaped by the sea, by time, and by shifting currents — into small works of art for the home, keeping their natural beauty and imperfection intact.</p>
+    </div>
+  </section>
+
+  <!-- POSITIONING STATEMENT -->
+  <section class="statement wrap">
+    <p>Bringing a little sea into your everyday. This project was born from a simple wish: to work with your hands, to choose the creative over the productive. Shells felt like the right material – slow sunlit days, salt on the lips, the particular stillness that only the sea can give.</p>
+  </section>
+
+  <!-- MERCH RAIL -->
+  <section class="rail">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">new this season</div>
+          <h2 style="margin-top:10px;">Recently finished</h2>
+        </div>
+        <a class="see-all" href="#dishes" style="color:var(--bone);">see all pieces</a>
+      </div>
+    </div>
+    <div class="rail-grid">
+      <div class="rail-item">
+        <div class="rail-photo"><img src="assets/dish-gull-lighthouse.jpg" alt="Shell dish decoupaged with a seagull and lighthouse motif, gold edge"></div>
+        <div class="wrap"><div class="info"><div class="tag">shell dish — one of one</div><h3>Lighthouse dish</h3></div></div>
+      </div>
+      <div class="rail-item">
+        <div class="rail-photo"><img src="assets/wine-stopper-marble.jpg" alt="Gold-edged oyster shell wine stopper"></div>
+        <div class="wrap"><div class="info"><div class="tag">wine stopper</div><h3>Oyster stopper</h3></div></div>
+      </div>
+      <div class="rail-item">
+        <div class="rail-photo"><img src="assets/incense-styled.jpg" alt="Gold-edged shell incense holder with a single pearl"></div>
+        <div class="wrap"><div class="info"><div class="tag">incense holder</div><h3>Pearl incense holder</h3></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLLECTIONS -->
+  <section id="collections" style="padding-top:0;">
+    <div class="collections">
+      <a class="coll-block" href="#dishes" id="dishes">
+        <div class="bg"><img src="assets/dish-coral-driftwood.jpg" alt="Coral-patterned shell dish beside driftwood on weathered stone"></div>
+        <div class="info">
+          <div class="count">7 pieces</div>
+          <h3>Shell dishes</h3>
+          <p>Decoupaged trinket and jewelry dishes, gold leaf edge, each shell its own shape.</p>
+          <span class="view">view dishes</span>
+        </div>
+      </a>
+      <a class="coll-block" href="#stoppers" id="stoppers">
+        <div class="bg"><img src="assets/wine-stopper-cloth.jpg" alt="Gold-rimmed oyster shell wine stopper"></div>
+        <div class="info">
+          <div class="count">3 pieces</div>
+          <h3>Wine stoppers</h3>
+          <p>Oyster shells gilded and fitted to a stopper — one shell, one bottle, kept.</p>
+          <span class="view">view stoppers</span>
+        </div>
+      </a>
+      <a class="coll-block" href="#incense" id="incense">
+        <div class="bg"><img src="assets/incense-hands-pebbles.jpg" alt="Hands holding a gold-edged shell incense holder over a pebble shoreline"></div>
+        <div class="info">
+          <div class="count">4 pieces</div>
+          <h3>Incense holders</h3>
+          <p>A single pearl to hold the stick, set into the natural curve of the shell.</p>
+          <span class="view">view holders</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FEATURED OBJECT -->
+  <section class="featured" id="featured">
+    <div class="wrap feat-grid">
+      <div class="feat-photos">
+        <div class="tall"><img src="assets/incense-styled.jpg" alt="Pearl incense holder styled on crumpled paper in warm light"></div>
+        <div class="small"><img src="assets/incense-hands-pebbles.jpg" alt="The same incense holder held in two hands over a pebble shoreline"></div>
+        <div class="small"><img src="assets/dish-pearls-detail.jpg" alt="Close detail of freshwater pearls against a blue and white shell dish"></div>
+      </div>
+      <div class="feat-copy">
+        <div class="eyebrow">featured — christmas ornaments</div>
+        <h2>Shell Christmas Ornament</h2>
+        <p class="lede">A single scallop shell, hand-decoupaged with delicate winter motifs.</p>
+        <div class="variation-note">No two shells are alike — the pattern, the curve, and the natural markings on your piece will differ slightly from the one shown.</div>
+        <div class="spec">
+          <div class="spec-row"><span>material</span><span>scallop shell, paper napkin, acrylic paint, gold paint, epoxy resin, ribbon, wooden bead</span></div>
+          <div class="spec-row"><span>dimensions</span><span>approx. 9 × 6 cm</span></div>
+        </div>
+        <a class="btn" href="#commission">inquire</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MATERIALS / PROCESS -->
+  <section class="materials" id="materials">
+    <div class="wrap mat-grid">
+      <div class="mat-photos">
+        <div><img src="assets/process-table.jpg" alt="Studio table with shells, decoupage papers, and gilding tools"></div>
+        <div><img src="assets/process-painting.jpg" alt="Hands applying decoupage paper and gold leaf to a shell with a brush"></div>
+      </div>
+      <div>
+        <div class="eyebrow" style="color:var(--fog);">materials &amp; process</div>
+        <h2 style="margin-top:12px;">From a restaurant to shelf</h2>
+        <p style="margin-top:22px;">Many of the shells are collected from restaurants — what was meant to become waste just yesterday becomes part of an interior today, taking on a new life in a different form. This approach is very close to my heart: creating something new without generating unnecessary waste, while working with what already exists in nature and the urban environment.</p>
+        <ul class="mat-list">
+          <li><span class="n">01</span><div><strong>Gather &amp; clean</strong><span class="d">Collected shell by shell, washed, and sorted by shape and thickness.</span></div></li>
+          <li><span class="n">02</span><div><strong>Decoupage</strong><span class="d">A chosen paper motif is applied by hand and sealed under lacquer, layer by layer.</span></div></li>
+          <li><span class="n">03</span><div><strong>Gild the edge</strong><span class="d">The natural edge is finished in gold leaf, following the shell's own line — never straightened.</span></div></li>
+          <li><span class="n">04</span><div><strong>Set &amp; finish</strong><span class="d">Pearls, stoppers, or incense fittings are set by hand, then the piece is sealed and cured.</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap about-grid">
+      <div>
+        <div class="eyebrow">about</div>
+        <h2 style="margin-top:12px;">Made by the sea, shaped by a creative soul</h2>
+        <p style="margin-top:22px;">Bringing a little sea into your everyday. This project was born from a simple wish: to work with your hands, to choose the creative over the productive. Shells felt like the right material – slow sunlit days, salt on the lips, the particular stillness that only the sea can give.</p>
+        <p>A little gold, a small detail, a new shape – and a shell once tossed aside becomes a stand for jewelry, a stopper for wine, a decoration for the tree, or a candle poured in pearl-soft wax. Nothing wasted, everything given a second life.</p>
+      </div>
+      <div class="about-photo"><img src="assets/dish-gull-lighthouse.jpg" alt="Shell dish with a seagull and lighthouse motif, gold edge, resting on weathered stone with driftwood"></div>
+    </div>
+  </section>
+
+  <!-- COMMISSION -->
+  <section class="commission" id="commission">
+    <div class="bg"><img src="assets/dish-floral-earrings.jpg" alt="Floral decoupaged shell dish holding a pair of earrings"></div>
+    <div class="wrap">
+      <div class="commission-inner">
+        <div class="eyebrow" style="color:var(--fog);">make it custom</div>
+        <h2 style="margin-top:12px;">Have a shell made into something to keep</h2>
+        <p style="margin-top:18px;">Some things are made to be personal. We create custom pieces for weddings and special events, as well as shells personalized with your own words, motifs, or special prints. Tell us what you have in mind, and we'll explore what's possible with the shells and materials we have on hand.</p>
+        <a class="btn ghost" href="mailto:gurevich.sonya.m@gmail.com">start a custom piece</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter">
+    <div class="wrap nl-inner">
+      <h2>Hear about new pieces first</h2>
+      <form class="nl-form" onsubmit="return false;">
+        <input type="email" placeholder="Email address" aria-label="Email address" required>
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="mark"><img src="assets/logo-light.png" alt="Morya Shum"></div>
+        <p style="max-width:32ch;">A shell-object studio creating handmade pieces from hand-picked shells, celebrating their natural forms through gilding, painting, decoupage, and other forms of decoration.</p>
+      </div>
+      <div class="foot-col">
+        <div class="label">shop</div>
+        <a href="#dishes">Shell dishes</a>
+        <a href="#stoppers">Wine stoppers</a>
+        <a href="#incense">Incense holders</a>
+        <a href="#commission">Make it custom</a>
+      </div>
+      <div class="foot-col">
+        <div class="label">studio</div>
+        <a href="#materials">Materials &amp; process</a>
+        <a href="#about">About</a>
+      </div>
+      <div class="foot-col">
+        <div class="label">contact</div>
+        <a href="mailto:gurevich.sonya.m@gmail.com">gurevich.sonya.m@gmail.com</a>
+        <a href="https://instagram.com/moryashum" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 morya shum studio</span>
+      <span>fragments of the sea</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var toggle = document.getElementById('navToggle');
+  var links = document.getElementById('navLinks');
+  toggle.addEventListener('click', function(){
+    var open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  links.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      links.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
+</body>
+</html>
